@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nvidia-gpu-driver
+spec:
+  containers:
+    - name: nvidia-gpu-driver
+      image: nvidia/driver:418.87.01-4.19.68-coreos-coreos
+      args: ["--accept-license"]
+      securityContext:
+        privileged: true
+        seLinuxOptions:
+          type: spc_t
+      volumeMounts:
+        - mountPath: /run/nvidia
+          name: run-nvidia-volume
+        - mountPath: /var/log
+          name: var-log-volume
+  hostPID: true
+  nodeSelector:
+    gpu: nvidia
+  volumes:
+  - name: run-nvidia-volume
+    emptyDir: {}
+  - name: var-log-volume
+    emptyDir: {}
