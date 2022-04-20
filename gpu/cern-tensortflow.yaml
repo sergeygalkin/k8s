@@ -23,7 +23,7 @@ spec:
         - name: nvidia-driver
           mountPath: /opt/nvidia-driver
   nodeSelector:
-    gpu: true
+    gpu: nvidia
   volumes:
   - name: nvidia-driver
     hostPath:
